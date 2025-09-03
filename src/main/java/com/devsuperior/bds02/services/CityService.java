@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.devsuperior.bds02.dto.CityDTO;
+import com.devsuperior.bds02.entities.City;
 import com.devsuperior.bds02.repositories.CityRepository;
 
 @Service
@@ -23,5 +24,11 @@ public class CityService {
             .map(CityDTO::new)
             .toList();
     }
-    
+
+    @Transactional
+    public CityDTO insert(CityDTO dto) {
+        City entity = new City(null, dto.getName());
+        return new CityDTO(cityRepository.save(entity));
+    }
+
 }
