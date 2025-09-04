@@ -31,4 +31,9 @@ public class CityService {
         return new CityDTO(cityRepository.save(entity));
     }
 
+    @Transactional
+    public void delete(Long id) {
+        cityRepository.deleteById(id);
+    }
+
 }
