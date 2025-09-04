@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.devsuperior.bds02.dto.CityDTO;
 import com.devsuperior.bds02.entities.City;
 import com.devsuperior.bds02.repositories.CityRepository;
+import com.devsuperior.bds02.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class CityService {
@@ -33,6 +34,9 @@ public class CityService {
 
     @Transactional
     public void delete(Long id) {
+        if (!cityRepository.existsById(id)) {
+            throw new ResourceNotFoundException();
+        }
         cityRepository.deleteById(id);
     }
 
